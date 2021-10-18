@@ -2,7 +2,7 @@
 import os
 
 from pydantic import Field
-from src.settings import Settings
+from .settings import Settings
 
 
 VAULT_PATH = "workers/odin"
