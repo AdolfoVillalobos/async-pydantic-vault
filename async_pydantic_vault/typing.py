@@ -5,7 +5,7 @@ from pydantic import Field
 from .settings import Settings
 
 
-VAULT_PATH = "workers/odin"
+VAULT_PATH = "workers/odin/"
 
 
 class NatsStreamingEnv(Settings):
