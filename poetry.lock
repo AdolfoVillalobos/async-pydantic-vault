@@ -16,7 +16,7 @@ yarl = ">=1.0,<2.0"
 
 [[package]]
 name = "async-hvac"
-version = "0.6.1"
+version = "0.6.0"
 description = "HashiCorp Vault API client"
 category = "main"
 optional = false
@@ -215,7 +215,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "4f37e10a655e253c340f539148020f425e722396b6da5e3c727924243f0adb30"
+content-hash = "ebb1f7361d85d40e63445c61eba6048d9532abb1357a27bc1447dbd1be7bcc0e"
 
 [metadata.files]
 aiohttp = [
@@ -236,7 +236,7 @@ aiohttp = [
     {file = "aiohttp-3.3.1.tar.gz", hash = "sha256:16ac24a3278375d277dacf992ac07084865c3aad3e625fc5be693c4b7e7f550d"},
 ]
 async-hvac = [
-    {file = "async-hvac-0.6.1.tar.gz", hash = "sha256:1fe607b26b81dc2309f4e749326db8523d5fc9541a03adc0da12dbe8c06273c6"},
+    {file = "async-hvac-0.6.0.tar.gz", hash = "sha256:d34e035d1868e4ad4e66e38d122d5803e9c950dbce49f5ca0bbd103de28ff374"},
 ]
 async-timeout = [
     {file = "async-timeout-3.0.1.tar.gz", hash = "sha256:0c3c816a028d47f659d6ff5c745cb2acf1f966da1fe5c19c77a70282b25f4c5f"},
