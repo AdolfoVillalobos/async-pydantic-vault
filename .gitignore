@@ -1,3 +1,6 @@
 .DS_Store
 *.whl
 *.tar.gz
+.env
+dist/
+.vscode
