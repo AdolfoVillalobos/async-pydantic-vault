@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "async-pydantic-vault"
-version = "0.1.5"
+version = "0.1.7"
 description = "A simple extension to Pydantic BaseSettings that can retrieve secrets from Hashicorp Vault using Async"
 authors = ["Adolfo Villalobos <amvillalobos@uc.cl>"]
 readme = "README.rst"
