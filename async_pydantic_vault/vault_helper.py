@@ -76,10 +76,17 @@ async def _get_authenticated_vault_client(
                 jwt=_vault_kubernetes.jwt_token.get_secret_value(),
             )
 
-            client = AsyncClient(
-                url=_vault_url, token=token["auth"]["client_token"])
-            await hvac_client_token.close()
-            return client
+            try:
+                client = AsyncClient(
+                    url=_vault_url, token=token["auth"]["client_token"])
+                await hvac_client_token.close()
+                return client
+            except Exception as err:
+                logging.debug(
+                    "Could not get Authenticated VAULT Client. Try Again")
+                logging.debug(err)
+                await hvac_client_token.close()
+                raise err
         else:
             return None
     except Exception as err:

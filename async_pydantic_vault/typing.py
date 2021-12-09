@@ -93,8 +93,8 @@ class MongoEnv(Settings):
     name: str = Field(
         ...,
         env="mongo_name",
-        vault_secret_path=None,
-        vault_secret_key=None,
+        vault_secret_path=VAULT_PATH,
+        vault_secret_key="mongo_name",
     )
 
 
