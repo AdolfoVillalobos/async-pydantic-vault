@@ -17,7 +17,7 @@ class NatsStreamingEnv(Settings):
     )
 
     stan_client_id: str = Field(
-        ..., env="stan_client_id", vault_secret_path=None, vault_secret_key=None
+        ..., vault_secret_path=VAULT_PATH, vault_secret_key="stan_client_id"
     )
 
     pod_name: str = Field(
@@ -102,8 +102,8 @@ class DiscordEnv(Settings):
     url: str = Field(
         ...,
         env="discord_url",
-        vault_secret_path=None,
-        vault_secret_key=None,
+        vault_secret_path=VAULT_PATH,
+        vault_secret_key="discord_url",
     )
 
 

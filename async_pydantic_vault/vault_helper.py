@@ -2,7 +2,7 @@ import os
 from typing import Dict, Any, Optional, NamedTuple, Union
 from pydantic import SecretStr
 from pydantic import BaseSettings as PydanticBaseSettings
-from async_hvac import AsyncClient
+from hvac import Client as HvacClient
 import logging
 from contextlib import suppress
 import asyncio
@@ -53,7 +53,7 @@ def _extract_kubernetes(settings: PydanticBaseSettings) -> Optional[Kubernetes]:
 
 async def _get_authenticated_vault_client(
     settings: PydanticBaseSettings,
-) -> Optional[AsyncClient]:
+) -> Optional[HvacClient]:
 
     client = None
     token = None
@@ -70,23 +70,13 @@ async def _get_authenticated_vault_client(
         _vault_kubernetes = _extract_kubernetes(settings)
 
         if _vault_kubernetes is not None:
-            hvac_client_token = AsyncClient(url=_vault_url)
-            token = await hvac_client_token.auth_kubernetes(
-                role=_vault_kubernetes.role,
-                jwt=_vault_kubernetes.jwt_token.get_secret_value(),
+            hvac_client_token = HvacClient(url=_vault_url)
+            token = hvac_client_token.auth.kubernetes.login(
+                _vault_kubernetes.role,
+                _vault_kubernetes.jwt_token.get_secret_value(),
             )
 
-            try:
-                client = AsyncClient(
-                    url=_vault_url, token=token["auth"]["client_token"])
-                await hvac_client_token.close()
-                return client
-            except Exception as err:
-                logging.debug(
-                    "Could not get Authenticated VAULT Client. Try Again")
-                logging.debug(err)
-                await hvac_client_token.close()
-                raise err
+            return client
         else:
             return None
     except Exception as err:
@@ -95,7 +85,7 @@ async def _get_authenticated_vault_client(
 
 
 async def _get_credentials(
-    settings: PydanticBaseSettings, vault_client: AsyncClient, _vault_service: str
+    settings: PydanticBaseSettings, vault_client: HvacClient, _vault_service: str
 ) -> Dict[str, Any]:
     d: Dict[str, Any] = {}
     if vault_client is None:
